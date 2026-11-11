@@ -55,6 +55,11 @@ jobs:
           Copy-Item $ffmpeg.FullName vendor\ffmpeg.exe
           Copy-Item $ffprobe.FullName vendor\ffprobe.exe
 
+      - name: Добавить ffmpeg в PATH (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: echo "${{ github.workspace }}\vendor" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+
       - name: Установить зависимости
         run: pip install ".[dev]" pyinstaller
 
