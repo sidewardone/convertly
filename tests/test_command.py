@@ -4,13 +4,21 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
+from convertly.core.capabilities import ffmpeg_available
 from convertly.core.command import (
     ConversionSettings,
     audio_bitrate_for_quality,
     build_command,
     unique_output_path,
 )
+from convertly.core.formats import available_video_codecs, format_by_key
 from convertly.core.probe import MediaInfo
+
+pytestmark = pytest.mark.skipif(
+    not ffmpeg_available(), reason="ffmpeg не установлен"
+)
 
 
 def make_info(kind: str = "video", **overrides) -> MediaInfo:
@@ -31,14 +39,15 @@ def make_info(kind: str = "video", **overrides) -> MediaInfo:
 
 
 def test_video_command_has_progress_and_encoder() -> None:
+    encoder = available_video_codecs(format_by_key("mp4"))[0][0]
     command = build_command(
         make_info(),
-        ConversionSettings(format_key="mp4", video_codec="libx264", quality=75),
+        ConversionSettings(format_key="mp4", video_codec=encoder, quality=75),
         Path("out.mp4"),
     )
     assert "-progress" in command
     assert "pipe:1" in command
-    assert command[command.index("-c:v") + 1] == "libx264"
+    assert command[command.index("-c:v") + 1] == encoder
 
     crf = int(command[command.index("-crf") + 1])
     assert 18 <= crf <= 35

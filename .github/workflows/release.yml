@@ -41,12 +41,15 @@ jobs:
           mkdir -p vendor
           cp "$(command -v ffmpeg)" vendor/ffmpeg
           cp "$(command -v ffprobe)" vendor/ffprobe
+          if [ -f /usr/share/doc/ffmpeg/copyright ]; then
+            cp /usr/share/doc/ffmpeg/copyright vendor/FFMPEG-LICENSE.txt
+          fi
 
       - name: Подготовить ffmpeg (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $url = "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-lgpl.zip"
+          $url = "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip"
           Invoke-WebRequest -Uri $url -OutFile ffmpeg.zip
           Expand-Archive ffmpeg.zip -DestinationPath ffmpeg
           New-Item -ItemType Directory -Force vendor | Out-Null
@@ -54,6 +57,8 @@ jobs:
           $ffprobe = Get-ChildItem ffmpeg -Recurse -Filter ffprobe.exe | Select-Object -First 1
           Copy-Item $ffmpeg.FullName vendor\ffmpeg.exe
           Copy-Item $ffprobe.FullName vendor\ffprobe.exe
+          $license = Get-ChildItem ffmpeg -Recurse -Include LICENSE,LICENSE.txt,COPYING* | Select-Object -First 1
+          if ($license) { Copy-Item $license.FullName vendor\FFMPEG-LICENSE.txt }
 
       - name: Добавить ffmpeg в PATH (Windows)
         if: runner.os == 'Windows'

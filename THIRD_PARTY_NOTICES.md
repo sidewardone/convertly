@@ -1,5 +1,13 @@
 # Third-party notices
 
+## FFmpeg
+
+В релизные архивы входит сборка FFmpeg (GPL) с поддержкой H.264/H.265.
+Лицензия и ссылки на исходный код: `packaging/FFMPEG_NOTICE.txt`.
+Исходники: https://ffmpeg.org/download.html
+Сборки для Windows: https://github.com/BtbN/FFmpeg-Builds
+
+
 ## Lucide Icons
 
 Иконки `arrow-down-to-line` и `arrow-right-left` взяты из набора Lucide:

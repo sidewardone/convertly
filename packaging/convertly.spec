@@ -9,7 +9,12 @@ datas = [
     (str(assets), "convertly/ui/assets"),
     (str(project / "LICENSE"), "."),
     (str(project / "THIRD_PARTY_NOTICES.md"), "."),
+    (str(project / "packaging" / "FFMPEG_NOTICE.txt"), "."),
 ]
+
+ffmpeg_license = project / "vendor" / "FFMPEG-LICENSE.txt"
+if ffmpeg_license.exists():
+    datas.append((str(ffmpeg_license), "."))
 
 binaries = []
 for name in ("ffmpeg", "ffprobe"):

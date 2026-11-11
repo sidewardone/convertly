@@ -1,0 +1,17 @@
+FFmpeg в сборке Convertly
+=========================
+
+В архивы Convertly входит исполняемый файл FFmpeg, собранный с поддержкой
+кодеков H.264 и H.265 (GPL-сборка).
+
+FFmpeg распространяется по лицензии GPL. Исходный код FFmpeg доступен на
+официальном сайте:
+
+    https://ffmpeg.org/download.html
+    https://ffmpeg.org/legal.html
+
+Сборки для Windows: https://github.com/BtbN/FFmpeg-Builds
+Сборки для Linux:   https://ffmpeg.org/download.html#build-linux
+
+Текст лицензии FFmpeg находится рядом с приложением в файле
+FFMPEG-LICENSE.txt.

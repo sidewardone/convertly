@@ -17,6 +17,25 @@ requires_ffmpeg = pytest.mark.skipif(
 )
 
 
+def _pick_video_encoder() -> str:
+    """Первый доступный энкодер: GPL-сборки содержат libx264, LGPL — нет."""
+    try:
+        result = subprocess.run(
+            [FFMPEG, "-hide_banner", "-encoders"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except OSError:
+        return "mpeg4"
+
+    listing = result.stdout or ""
+    for encoder in ("libx264", "libx265", "libvpx-vp9", "mpeg4"):
+        if f" {encoder} " in listing:
+            return encoder
+    return "mpeg4"
+
+
 @pytest.fixture(scope="session")
 def media_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
     """Небольшие видео, аудио и картинка, созданные ffmpeg."""
@@ -24,6 +43,7 @@ def media_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
         pytest.skip("ffmpeg не установлен в системе")
 
     directory = tmp_path_factory.mktemp("media")
+    encoder = _pick_video_encoder()
 
     subprocess.run(
         [
@@ -43,7 +63,7 @@ def media_dir(tmp_path_factory: pytest.TempPathFactory) -> Path:
             "-t",
             "1.2",
             "-c:v",
-            "libx264",
+            encoder,
             "-pix_fmt",
             "yuv420p",
             "-c:a",

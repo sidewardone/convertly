@@ -195,3 +195,6 @@ convertly/
 Код распространяется по MIT — см. `LICENSE`.
 Иконки интерфейса и логотип используют пути из набора [Lucide](https://lucide.dev)
 под лицензией ISC — см. `THIRD_PARTY_NOTICES.md`.
+
+В релизные архивы входит сборка FFmpeg под GPL (H.264/H.265).
+Текст лицензии и ссылки на исходники — `packaging/FFMPEG_NOTICE.txt`.
