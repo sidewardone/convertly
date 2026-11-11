@@ -25,7 +25,7 @@ jobs:
 
       - name: Установить ffmpeg (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg libegl1 libgl1 libxkbcommon0 libdbus-1-3 libfontconfig1 libxcb-cursor0
 
       - name: Установить ffmpeg (macOS)
         if: runner.os == 'macOS'

@@ -127,7 +127,7 @@ def test_reveal_job_falls_back_to_folder(
     )
 
     window.reveal_job(job.id)
-    assert opened == [str(output_dir)]
+    assert [Path(item) for item in opened] == [output_dir]
 
 
 def test_theme_switch_persists(qtbot, isolated_config):
