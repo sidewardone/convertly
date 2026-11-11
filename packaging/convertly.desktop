@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Convertly
+GenericName=Media Converter
+Comment=Convert video, audio and images with ffmpeg
+Exec=convertly
+Icon=convertly
+Terminal=false
+Categories=AudioVideo;Utility;
+Keywords=convert;ffmpeg;video;audio;image;
+StartupWMClass=convertly

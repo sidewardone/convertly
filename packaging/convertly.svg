@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4aa8ff"/>
+      <stop offset="1" stop-color="#0062cc"/>
+    </linearGradient>
+    <clipPath id="squircle">
+      <rect x="8" y="8" width="240" height="240" rx="58"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#squircle)">
+    <rect x="8" y="8" width="240" height="240" fill="url(#bg)"/>
+    <ellipse cx="128" cy="20" rx="150" ry="92" fill="#ffffff" opacity="0.16"/>
+  </g>
+
+  <!-- Иконка arrow-right-left из Lucide (ISC), отмасштабирована и перекрашена -->
+  <g transform="translate(50 50) scale(6.5)"
+     fill="none" stroke="#ffffff" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+    <path d="m16 3 4 4-4 4"/>
+    <path d="M20 7H4"/>
+    <path d="m8 21-4-4 4-4"/>
+    <path d="M4 17h16"/>
+  </g>
+</svg>
